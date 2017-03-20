@@ -127,7 +127,7 @@ prod_list = list(prod_iter)
 ## [PROBLEM 7]
 print("\n\n***** Problem 7 *****")
 # Create a list of tuples wherein each tuple has a student's name and productivity value. Save the list of tuples in a variable called names_and_productivities. To do this, you should use a list comprehension (you may also use the zip function, and you may use any variables you have already created).
-
+names_and_productivities = [(x[0][0], x[1]) for x in list(zip(student_tups_list, prod_list))]
 ## But be careful that if you use answers from previous problems, you use the LISTs you generated, so that all your tests can still pass and you avoid confusion!
 
 
@@ -135,17 +135,18 @@ print("\n\n***** Problem 7 *****")
 ## [PROBLEM 8]
 print("\n\n***** Problem 8 *****")
 # Use the Python filter function to select the subset of programmers who have names with 5 or more characters. (i.e. ["Albert","Dinesh","Euijin"]) Your result should be an filter object that points to Student instances. Save that filter iterator in a variable called long_names.
-
+long_names = filter(lambda x: len(x.name) > 5, programmers)
 
 
 ## Then write code to cast the value of long_names to a list and save it in the variable long_names_list. 
-
+long_names_list = list(long_names)
 
 
 ## [PROBLEM 9]
 print("\n\n***** Problem 9 *****")
 
 # Use a list comprehension to generate a LIST of just the names of those Student instances whose name is longer than their seniority (i.e., ["Albert", "Mai", "Dinesh", "Euijin"]). Assign it to a variable called names_with_not_too_much_seniority.
+names_with_not_too_much_seniority = [x.name for x in programmers if len(x.name) > x.years_UM]
 
 ## Note that you can use another list you have already created for this problem.
 
@@ -168,19 +169,25 @@ print("\n\n***** Problem 10 *****")
 ## We have provided files samplehw6_1.txt and samplehw6_2.txt for your use for this problem, which hopefully you have downloaded, so you can test with those file names! The test below also relies upon these files. Of course, you could also create other files for testing.
 
 # Define readfiles (make sure to close the file reference in the right place)
-
+def readfiles(lst):
+    for x in lst:
+        y = open(x)
+        for z in y:
+            yield z
+        y.close()
 
 # Define len_check
-
+def len_check(generator):
+    return(x for x in generator if len(x) > 40)
 
 # Define main_filterer
-
-
+def main_filterer(lst):
+    return len_check(readfiles(lst))
 
 ## Uncomment this code to test so you can see easily what results from your code. DO uncomment it. DO NOT delete or change it. (You can add other code above while you work, of course.)
-# provided_file_names = ["samplehw6_1.txt","samplehw6_2.txt"]
-# for ln in main_filterer(provided_file_names):
-#     print(ln.rstrip('\n'), end=" ")
+provided_file_names = ["samplehw6_1.txt","samplehw6_2.txt"]
+for ln in main_filterer(provided_file_names):
+    print(ln.rstrip('\n'), end=" ")
 #####
 
 
