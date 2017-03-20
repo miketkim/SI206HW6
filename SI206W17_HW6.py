@@ -117,9 +117,9 @@ print("\n\n***** Problem 6 *****")
 # A Student's programming_productivity is defined as that student's number of programs written divided by the years they have been at UMich.
 
 # Use the Python map function on the programmers list you just created, in order to create an map instance iterator of numbers representing the productivity of each student. Save the map iterator in a variable called prod_iter.
-
+prod_iter = map((lambda x: x.num_programs/x.years_UM), programmers)
 ## Write code to cast that iterator to a list. Save that list in the variable prod_list.
-
+prod_list = list(prod_iter)
 ## You may add a method to the Student class if you wish in order to do this, but you do not need to. (If you do, make sure you do not create any syntax errors that keep code/tests from running!)
 
 
